@@ -1,71 +1,72 @@
-//package br.com.futeweb.aplicacao.interfaces.quadra.controle;
-//
-//import java.util.List;
-//
-//import javax.ejb.Stateless;
-//
-//import br.com.futeweb.aplicacao.dao.GenericoDAO;
-//import br.com.futeweb.aplicacao.interfaces.master.entidade.Disponibilidade;
-//import br.com.futeweb.aplicacao.interfaces.quadra.entidade.Quadra;
-//
-//@Stateless
-//public class ControleQuadra extends GenericoDAO implements IControleQuadra {
-//
-//	private static final long serialVersionUID = 1L;
-//
-//	@Override
-//	public boolean inserir(Quadra object) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//	@Override
-//	public List<Quadra> obterTodos() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Quadra> obterPorCriterio(Quadra object) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public boolean atualizar(Quadra object) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean deletar(Quadra object) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean inserir(Disponibilidade object) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//	@Override
-//	public List<Disponibilidade> obterDisponibilidade(Quadra object) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Disponibilidade> obterPorCriterio(Disponibilidade object) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public boolean deletar(Disponibilidade object) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//
-//}
+package br.com.futeweb.aplicacao.interfaces.quadra.controle;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.Stateless;
+
+import br.com.futeweb.aplicacao.dao.GenericoDAO;
+import br.com.futeweb.aplicacao.interfaces.estabelecimento.entidade.Estabelecimento;
+import br.com.futeweb.aplicacao.interfaces.quadra.entidade.Quadra;
+
+@Stateless
+public class ControleQuadra extends GenericoDAO implements IControleQuadra {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public int inserir(Quadra object) throws SQLException {
+		String query = " insert into material (nome, id_estabelecimento) values (?, ?) ";
+		montarQuery(query);
+		setParametros().setString(1, object.getNome());
+		setParametros().setInt(2, object.getEstabelecimento().getId());
+		return executarUpdate();
+	}
+
+	@Override
+	public List<Quadra> obterTodos() {
+		List<Quadra> lista = new ArrayList<Quadra>();
+		String query = " select q.id, q.nome, ";
+		query += " es.id, es.nome, es.descricao ";
+		query += " from quadra q, estabelecimento e ";
+		query += " where q.id_estabelecimento = e.id ";
+		montarQuery(query);
+		String[][] retorno = executarQuery();
+		if (retorno != null){
+			for (String r[] : retorno){
+				lista.add(new Quadra(Integer.parseInt(r[0]), r[1],
+						new Estabelecimento(Integer.parseInt(r[2]), r[3], r[4], null)));
+			}
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Quadra> obterPorCriterio(Quadra object) throws SQLException {
+		List<Quadra> lista = new ArrayList<Quadra>();
+		String query = " select q.id, q.nome, ";
+		query += " es.id, es.nome, es.descricao ";
+		query += " from quadra q, estabelecimento e ";
+		query += " where q.id = ? or m.nome ";
+		query += " and q.id_estabelecimento = e.id ";
+		montarQuery(query);
+		String[][] retorno = executarQuery();
+		if (retorno != null){
+			for (String r[] : retorno){
+				lista.add(new Quadra(Integer.parseInt(r[0]), r[1],
+						new Estabelecimento(Integer.parseInt(r[2]), r[3], r[4], null)));
+			}
+		}
+		return lista;
+	}
+	
+	@Override
+	public int atualizar(Quadra object) throws SQLException {
+		String query = " update quadra set nome = ? where id = ? ";
+		montarQuery(query);
+		setParametros().setString(1, object.getNome());
+		setParametros().setInt(2, object.getId());
+		return executarUpdate();
+	}
+}

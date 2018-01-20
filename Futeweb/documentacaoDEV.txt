@@ -1,3 +1,5 @@
 Pacote endereço está 100%
 Pacote usuario está 100%
+Pacote material está 100% com particularidades na interface
+Pacote quadra está 100% com particularidades na interface
 Estabelecimento está quase pronto... so falta algumas dependecias dos vo's
