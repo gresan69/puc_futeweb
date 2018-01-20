@@ -15,7 +15,7 @@ import br.com.futeweb.aplicacao.utils.Mensagens;
 
 public abstract class GenericoDAO {
 	
-	public static final String DATA_SOURCE_FUTEWEB_USER= "jdbc/futeweb_user";
+	private static final String DATA_SOURCE_FUTEWEB_USER= "jdbc/futeweb_user";
 	
 	private Connection connection;
 	private PreparedStatement pstmt;

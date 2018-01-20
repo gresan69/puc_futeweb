@@ -1,22 +1,21 @@
 package br.com.futeweb.aplicacao.interfaces.endereco.entidade;
 
-import java.util.Date;
+import java.io.Serializable;
 
-import br.com.futeweb.aplicacao.interfaces.master.entidade.FuteWebVO;
-
-public class Endereco extends FuteWebVO {
+public class Endereco implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private int id;
 	private String logradouro;
 	private int numero;
 	private String cidade;
 	private String estado;
 	private String cep;
 	
-	public Endereco(int id, Date dataRegistro, int idAlterador, Date dataAlteracao, String logradouro, int numero,
-			String cidade, String estado, String cep) {
-		super(id, dataRegistro, idAlterador, dataAlteracao);
+	public Endereco(int id, String logradouro, int numero, String cidade, String estado, String cep) {
+		super();
+		this.id = id;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.cidade = cidade;
@@ -24,12 +23,12 @@ public class Endereco extends FuteWebVO {
 		this.cep = cep;
 	}
 	
-	@Override
-	public String toString() {
-		return "Endereco [logradouro=" + logradouro + ", numero=" + numero + ", cidade=" + cidade + ", estado=" + estado
-				+ ", cep=" + cep + "]";
+	public int getId() {
+		return id;
 	}
-
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -60,7 +59,4 @@ public class Endereco extends FuteWebVO {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
-	
-	
 }
