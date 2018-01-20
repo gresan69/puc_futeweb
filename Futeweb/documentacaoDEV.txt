@@ -1,0 +1,3 @@
+Pacote endereço está 100%
+Pacote usuario está 100%
+Estabelecimento está quase pronto... so falta algumas dependecias dos vo's
