@@ -17,7 +17,7 @@ public class ControleQuadra extends GenericoDAO implements IControleQuadra {
 
 	@Override
 	public int inserir(Quadra object) throws SQLException {
-		String query = " insert into material (nome, id_estabelecimento) values (?, ?) ";
+		String query = " insert into quadra (nome, id_estabelecimento) values (?, ?) ";
 		montarQuery(query);
 		setParametros().setString(1, object.getNome());
 		setParametros().setInt(2, object.getEstabelecimento().getId());
@@ -51,6 +51,7 @@ public class ControleQuadra extends GenericoDAO implements IControleQuadra {
 		query += " where q.id = ? or m.nome ";
 		query += " and q.id_estabelecimento = e.id ";
 		montarQuery(query);
+		setParametros().setInt(1, object.getId());
 		String[][] retorno = executarQuery();
 		if (retorno != null){
 			for (String r[] : retorno){

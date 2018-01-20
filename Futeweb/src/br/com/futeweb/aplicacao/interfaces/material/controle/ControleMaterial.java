@@ -51,6 +51,7 @@ public class ControleMaterial extends GenericoDAO implements IControleMaterial {
 		query += " where m.id = ? or m.nome ";
 		query += " and m.id_estabelecimento = e.id ";
 		montarQuery(query);
+		setParametros().setInt(1, object.getId());
 		String[][] retorno = executarQuery();
 		if (retorno != null){
 			for (String r[] : retorno){
