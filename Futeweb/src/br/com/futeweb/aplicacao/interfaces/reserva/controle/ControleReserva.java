@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
-import br.com.futeweb.aplicacao.dao.GenericoDAO;
+import br.com.futeweb.aplicacao.dao.generico.GenericoDAO;
 import br.com.futeweb.aplicacao.interfaces.master.entidade.Disponibilidade;
 import br.com.futeweb.aplicacao.interfaces.reserva.entidade.Reserva;
 import br.com.futeweb.aplicacao.interfaces.usuario.entidade.PessoaFisica;

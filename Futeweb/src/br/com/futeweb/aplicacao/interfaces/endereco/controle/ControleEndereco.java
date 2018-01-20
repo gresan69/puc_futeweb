@@ -1,74 +1,68 @@
 package br.com.futeweb.aplicacao.interfaces.endereco.controle;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
 
-import br.com.futeweb.aplicacao.dao.GenericoDAO;
+import br.com.futeweb.aplicacao.dao.endereco.EnderecoDAO;
 import br.com.futeweb.aplicacao.interfaces.endereco.entidade.Endereco;
+import br.com.futeweb.aplicacao.utils.Logger;
+import br.com.futeweb.aplicacao.utils.Mensagens;
 
 @Stateless
-public class ControleEndereco extends GenericoDAO implements IControleEndereco {
+public class ControleEndereco implements IControleEndereco {
 
 	private static final long serialVersionUID = 1L;
+	private EnderecoDAO dao;
+	
+	private EnderecoDAO getInstance(){
+		if (dao!=null){
+			dao = new EnderecoDAO();
+		}
+		return dao;
+	}
 	
 	@Override
 	public int inserir(Endereco object) throws SQLException {
-		String query = " insert into endereco (logradouro, numero, cidade, estado, cep) values (?, ?, ?, ?, ?) ";
-		montarQuery(query);
-		setParametros().setString(1, object.getLogradouro());
-		setParametros().setInt(2, object.getNumero());
-		setParametros().setString(3, object.getCidade());
-		setParametros().setString(4, object.getEstado());
-		setParametros().setString(5, object.getCep());
-		return executarUpdate();
+		int retorno = 0;
+		if (object.validarObjeto(object)){
+			retorno = getInstance().inserir(object);
+			if (retorno!=0){
+				new Logger(true, FacesMessage.SEVERITY_INFO, Mensagens.OK_ENDERECO_INSERIR, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+			}else{
+				new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_ENDERECO_INSERIR_0, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+			}
+		}else{
+			new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_PREENCHIMENTO, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+		}
+		return retorno;
 	}
 
 	@Override
 	public List<Endereco> obterTodos() {
-		List<Endereco> lista = new ArrayList<Endereco>();
-		String query = " select id, logradouro, numero, cidade, estado, cep from endereco ";
-		montarQuery(query);
-		String[][] retorno = executarQuery();
-		if (retorno != null){
-			for (String r[] : retorno){
-				lista.add(new Endereco(Integer.parseInt(r[0]), r[1], Integer.parseInt(r[2]), r[3], r[4], r[5]));
-			}
-		}
-		return lista;
+		return getInstance().obterTodos();
 	}
 
 	@Override
 	public List<Endereco> obterPorCriterio(Endereco object) throws SQLException {
-		List<Endereco> lista = new ArrayList<Endereco>();
-		String query = " select id, logradouro, numero, cidade, estado, cep from endereco where id = ? or logradouro = ? or cidade = ? or estado = ? or cep = ? ";
-		montarQuery(query);
-		setParametros().setInt(1, object.getId());
-		setParametros().setString(2, object.getLogradouro());
-		setParametros().setString(3, object.getCidade());
-		setParametros().setString(4, object.getEstado());
-		setParametros().setString(5, object.getCep());
-		String[][] retorno = executarQuery();
-		if (retorno != null){
-			for (String r[] : retorno){
-				lista.add(new Endereco(Integer.parseInt(r[0]), r[1], Integer.parseInt(r[2]), r[3], r[4], r[5]));
-			}
-		}
-		return lista;
+		return getInstance().obterPorCriterio(object);
 	}
 	
 	@Override
 	public int atualizar(Endereco object) throws SQLException {
-		String query = " update endereco set logradouro = ?, numero = ?, cidade = ?, estado = ?, cep = ? where id = ? ";
-		montarQuery(query);
-		setParametros().setString(1, object.getLogradouro());
-		setParametros().setInt(2, object.getNumero());
-		setParametros().setString(3, object.getCidade());
-		setParametros().setString(4, object.getEstado());
-		setParametros().setString(5, object.getCep());
-		setParametros().setInt(6, object.getId());
-		return executarUpdate();
+		int retorno = 0;
+		if (object.validarObjeto(object)){
+			retorno = getInstance().atualizar(object);
+			if (retorno!=0){
+				new Logger(true, FacesMessage.SEVERITY_INFO, Mensagens.OK_ENDERECO_ATUALIZAR, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+			}else{
+				new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_ENDERECO_ATUALIZAR_0, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+			}
+		}else{
+			new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_PREENCHIMENTO, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+		}
+		return retorno;
 	}
 }

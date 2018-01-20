@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
-import br.com.futeweb.aplicacao.dao.GenericoDAO;
+import br.com.futeweb.aplicacao.dao.generico.GenericoDAO;
 import br.com.futeweb.aplicacao.interfaces.estabelecimento.entidade.Estabelecimento;
 import br.com.futeweb.aplicacao.interfaces.material.entidade.Material;
 

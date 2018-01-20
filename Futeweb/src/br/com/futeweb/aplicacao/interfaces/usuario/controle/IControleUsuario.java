@@ -3,7 +3,7 @@ package br.com.futeweb.aplicacao.interfaces.usuario.controle;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.com.futeweb.aplicacao.dao.IGenericoDAO;
+import br.com.futeweb.aplicacao.dao.generico.IGenericoDAO;
 import br.com.futeweb.aplicacao.interfaces.usuario.entidade.PessoaFisica;
 import br.com.futeweb.aplicacao.interfaces.usuario.entidade.PessoaJuridica;
 import br.com.futeweb.aplicacao.interfaces.usuario.entidade.Usuario;

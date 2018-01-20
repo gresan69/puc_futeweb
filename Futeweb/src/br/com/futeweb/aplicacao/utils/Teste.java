@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-import br.com.futeweb.aplicacao.interfaces.endereco.controle.ControleEndereco;
+import br.com.futeweb.aplicacao.dao.endereco.EnderecoDAO;
 import br.com.futeweb.aplicacao.interfaces.endereco.controle.IControleEndereco;
 import br.com.futeweb.aplicacao.interfaces.endereco.entidade.Endereco;
 import br.com.futeweb.aplicacao.interfaces.estabelecimento.controle.ControleEstabelecimento;
@@ -75,7 +75,7 @@ public class Teste {
 	}
 	
 	private void testarEndereco() throws SQLException{
-		IControleEndereco impl = new ControleEndereco();
+		IControleEndereco impl = new EnderecoDAO();
 		if (acao==1){
 			impl.inserir(endereco);
 		}else if (acao==2){

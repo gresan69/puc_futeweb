@@ -1,4 +1,4 @@
-package br.com.futeweb.aplicacao.dao;
+package br.com.futeweb.aplicacao.dao.generico;
 
 import java.io.Serializable;
 import java.sql.SQLException;

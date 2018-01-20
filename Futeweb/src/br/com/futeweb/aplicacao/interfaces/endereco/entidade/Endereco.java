@@ -8,7 +8,7 @@ public class Endereco implements Serializable {
 	
 	private int id;
 	private String logradouro;
-	private int numero;
+	private int numero = 0;
 	private String cidade;
 	private String estado;
 	private String cep;
@@ -21,6 +21,16 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.cep = cep;
+	}
+	
+	public boolean validarObjeto(Endereco obj){
+		return (obj!=null
+				&& obj.getLogradouro()!=null && !"".equals(obj.getLogradouro())
+				&& obj.getNumero()!=0
+				&& obj.getCidade()!=null && !"".equals(obj.getCidade())
+				&& obj.getEstado()!=null && !"".equals(obj.getEstado())
+				&& obj.getCep()!=null && !"".equals(obj.getCep())
+				) ? true : false;
 	}
 	
 	public int getId() {

@@ -18,6 +18,13 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 		this.ativo = ativo;
 	}
+	
+	public boolean validarObjeto(Usuario obj){
+		return (obj!=null
+				&& obj.getLogin()!=null && !"".equals(obj.getLogin())
+				&& obj.getSenha()!=null && !"".equals(obj.getSenha())
+				) ? true : false;
+	}
 
 	public int getId() {
 		return id;

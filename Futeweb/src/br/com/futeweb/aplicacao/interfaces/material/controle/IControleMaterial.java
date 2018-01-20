@@ -1,6 +1,6 @@
 package br.com.futeweb.aplicacao.interfaces.material.controle;
 
-import br.com.futeweb.aplicacao.dao.IGenericoDAO;
+import br.com.futeweb.aplicacao.dao.generico.IGenericoDAO;
 import br.com.futeweb.aplicacao.interfaces.material.entidade.Material;
 
 public interface IControleMaterial extends IGenericoDAO<Material>  {
