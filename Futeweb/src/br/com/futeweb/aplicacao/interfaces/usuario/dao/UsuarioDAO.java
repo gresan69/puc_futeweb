@@ -20,6 +20,48 @@ public class UsuarioDAO extends GenericoDAO implements IControleUsuario {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
+	public PessoaFisica autenticarPF(Usuario object) throws SQLException{
+		PessoaFisica pessoa = null;
+		String query = " select pf.id, pf.nome, pf.email, pf.cpf, pf.data_nascimento, ";
+		query += " u.id, u.login, u.ativo  ";
+		query += " from pessoa_fisica pf, usuario u ";
+		query += " where pf.id_usuario = u.id ";
+		query += " and u.ativo = 1 and login = ? and senha = ? ";
+		montarQuery(query);
+		setParametros().setString(1, object.getLogin());
+		setParametros().setString(2, object.getSenha());
+		String[][] retorno = executarQuery();
+		if (retorno != null){
+			for (String r[] : retorno){
+				pessoa = new PessoaFisica(Integer.parseInt(r[0]), r[1], r[2], r[3], AplicacaoUtils.parseDate(r[4]),
+						new Usuario(Integer.parseInt(r[5]), r[6], r[7], ("1".equals(r[8]))), null);
+			}
+		}
+		return pessoa;
+	}
+	
+	@Override
+	public PessoaJuridica autenticarPJ(Usuario object) throws SQLException{
+		PessoaJuridica pessoa = null;
+		String query = " select pj.id, pj.nome, pj.email, pj.cnpj, pj.data_nascimento ";
+		query += " u.id, u.login, u.ativo ";
+		query += " from pessoa_juridica pj, usuario u ";
+		query += " where pj.id_usuario = u.id ";
+		query += " and u.ativo = 1 and login = ? and senha = ? ";
+		montarQuery(query);
+		setParametros().setString(1, object.getLogin());
+		setParametros().setString(2, object.getSenha());
+		String[][] retorno = executarQuery();
+		if (retorno != null){
+			for (String r[] : retorno){
+				pessoa = new PessoaJuridica(Integer.parseInt(r[0]), r[1], r[2], r[3], AplicacaoUtils.parseDate(r[4]) ,
+						new Usuario(Integer.parseInt(r[4]), r[5], r[6], ("1".equals(r[7]))));
+			}
+		}
+		return pessoa;
+	}
+	
+	@Override
 	public int inserir(Usuario object) throws SQLException {
 		String query = " insert into Usuario (login, senha) values (?, ?) ";
 		montarQuery(query);
@@ -88,7 +130,7 @@ public class UsuarioDAO extends GenericoDAO implements IControleUsuario {
 	public List<PessoaFisica> obterPessoaFisica() {
 		List<PessoaFisica> lista = new ArrayList<PessoaFisica>();
 		String query = " select pf.id, pf.nome, pf.email, pf.cpf, pf.data_nascimento, ";
-		query += " u.id, u.login, u.ativo  ";
+		query += " u.id, u.login, u.ativo,  ";
 		query += " e.id, e.logradouro, e.numero, e.cidade, e.estado, e.cep ";
 		query += " from pessoa_fisica pf, usuario u, endereco e ";
 		query += " where pf.id_usuario = u.id ";
@@ -157,7 +199,7 @@ public class UsuarioDAO extends GenericoDAO implements IControleUsuario {
 	@Override
 	public List<PessoaJuridica> obterPessoaJuridica() {
 		List<PessoaJuridica> lista = new ArrayList<PessoaJuridica>();
-		String query = " select pj.id, pj.nome, pj.email, pj.cnpj, ";
+		String query = " select pj.id, pj.nome, pj.email, pj.cnpj, pj.data_nascimento ";
 		query += " u.id, u.login, u.ativo ";
 		query += " from pessoa_juridica pj, usuario u ";
 		query += " where pj.id_usuario = u.id ";
@@ -165,7 +207,7 @@ public class UsuarioDAO extends GenericoDAO implements IControleUsuario {
 		String[][] retorno = executarQuery();
 		if (retorno != null){
 			for (String r[] : retorno){
-				lista.add(new PessoaJuridica(Integer.parseInt(r[0]), r[1], r[2], r[3], 
+				lista.add(new PessoaJuridica(Integer.parseInt(r[0]), r[1], r[2], r[3], AplicacaoUtils.parseDate(r[4]) ,
 						new Usuario(Integer.parseInt(r[4]), r[5], r[6], ("1".equals(r[7])))));
 			}
 		}
@@ -175,7 +217,7 @@ public class UsuarioDAO extends GenericoDAO implements IControleUsuario {
 	@Override
 	public List<PessoaJuridica> obterPorCriterio(PessoaJuridica object) throws SQLException {
 		List<PessoaJuridica> lista = new ArrayList<PessoaJuridica>();
-		String query = " select pj.id, pj.nome, pj.email, pj.cnpj, ";
+		String query = " select pj.id, pj.nome, pj.email, pj.cnpj, pj.data_nascimento ";
 		query += " u.id, u.login, u.ativo ";
 		query += " from pessoa_juridica pj, usuario u ";
 		query += " where pj.id = ? or pj.nome = ? or pj.email = ? or pj.cnpj = ? ";
@@ -184,7 +226,7 @@ public class UsuarioDAO extends GenericoDAO implements IControleUsuario {
 		String[][] retorno = executarQuery();
 		if (retorno != null){
 			for (String r[] : retorno){
-				lista.add(new PessoaJuridica(Integer.parseInt(r[0]), r[1], r[2], r[3], 
+				lista.add(new PessoaJuridica(Integer.parseInt(r[0]), r[1], r[2], r[3], AplicacaoUtils.parseDate(r[4]) ,
 						new Usuario(Integer.parseInt(r[4]), r[5], r[6], ("1".equals(r[7])))));
 			}
 		}

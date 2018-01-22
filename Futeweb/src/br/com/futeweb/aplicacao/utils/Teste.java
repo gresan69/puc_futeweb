@@ -56,7 +56,7 @@ public class Teste {
 			e.printStackTrace();
 		}
 		pessoaFisica = new PessoaFisica(1, "Jose Henrique Dias de Lima", "henriqueddl89@gmail.com", "04654782982", dataNascimento, usuario, endereco);
-		pessoaJuridica = new PessoaJuridica(1, "Desiree Angelica Rieiro de Lima", "desiree.ribeiro@hotmail.com", "1234/0001-10", usuario);
+		pessoaJuridica = new PessoaJuridica(1, "Desiree Angelica Rieiro de Lima", "desiree.ribeiro@hotmail.com", "1234/0001-10", dataNascimento,  usuario);
 		
 	}
 	

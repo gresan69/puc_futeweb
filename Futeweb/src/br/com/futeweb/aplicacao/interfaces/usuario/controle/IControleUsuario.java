@@ -20,4 +20,7 @@ public interface IControleUsuario extends IGenericoDAO<Usuario> {
 	public List<PessoaJuridica> obterPorCriterio(PessoaJuridica object) throws SQLException;
 	public int atualizar(PessoaJuridica object) throws SQLException;
 	
+	public PessoaFisica autenticarPF(Usuario object) throws SQLException;
+	public PessoaJuridica autenticarPJ(Usuario object) throws SQLException;
+	
 }

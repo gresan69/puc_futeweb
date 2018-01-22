@@ -1,11 +1,16 @@
 package br.com.futeweb.aplicacao.interfaces.endereco.dao;
 
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.xml.rpc.ServiceException;
 
+import br.com.correios.bsb.sigep.master.bean.cliente.AtendeCliente;
+import br.com.correios.bsb.sigep.master.bean.cliente.AtendeClienteServiceLocator;
+import br.com.correios.bsb.sigep.master.bean.cliente.EnderecoERP;
 import br.com.futeweb.aplicacao.dao.generico.GenericoDAO;
 import br.com.futeweb.aplicacao.interfaces.endereco.controle.IControleEndereco;
 import br.com.futeweb.aplicacao.interfaces.endereco.entidade.Endereco;
@@ -71,5 +76,15 @@ public class EnderecoDAO extends GenericoDAO implements IControleEndereco {
 		setParametros().setString(5, object.getCep());
 		setParametros().setInt(6, object.getId());
 		return executarUpdate();
+	}
+
+	@Override
+	public void buscarCep(Endereco endereco) throws ServiceException, RemoteException {
+		AtendeClienteServiceLocator locator = new AtendeClienteServiceLocator();
+		AtendeCliente a = locator.getAtendeClientePort();
+		EnderecoERP erp = a.consultaCEP(endereco.getCep());
+		endereco.setLogradouro(erp.getEnd());
+		endereco.setCidade(erp.getCidade());
+		endereco.setEstado(erp.getUf());
 	}
 }

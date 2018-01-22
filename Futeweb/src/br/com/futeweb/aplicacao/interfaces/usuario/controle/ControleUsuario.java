@@ -21,7 +21,7 @@ public class ControleUsuario extends GenericoDAO implements IControleUsuario {
 	private UsuarioDAO dao;
 	
 	private UsuarioDAO getInstance(){
-		if (dao!=null){
+		if (dao==null){
 			dao = new UsuarioDAO();
 		}
 		return dao;
@@ -175,6 +175,16 @@ public class ControleUsuario extends GenericoDAO implements IControleUsuario {
 			new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_PREENCHIMENTO, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
 		}
 		return retorno;
+	}
+
+	@Override
+	public PessoaFisica autenticarPF(Usuario object) throws SQLException {
+		return getInstance().autenticarPF(object);
+	}
+
+	@Override
+	public PessoaJuridica autenticarPJ(Usuario object) throws SQLException {
+		return getInstance().autenticarPJ(object);
 	}
 	
 }

@@ -19,7 +19,7 @@ public class ControleQuadra extends GenericoDAO implements IControleQuadra {
 	private QuadraDAO dao;
 	
 	private QuadraDAO getInstance(){
-		if (dao!=null){
+		if (dao==null){
 			dao = new QuadraDAO();
 		}
 		return dao;

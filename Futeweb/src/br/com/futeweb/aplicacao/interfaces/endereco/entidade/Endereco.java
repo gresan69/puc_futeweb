@@ -8,10 +8,12 @@ public class Endereco implements Serializable {
 	
 	private int id;
 	private String logradouro;
-	private int numero = 0;
+	private int numero;
 	private String cidade;
 	private String estado;
 	private String cep;
+	
+	public Endereco(){}
 	
 	public Endereco(int id, String logradouro, int numero, String cidade, String estado, String cep) {
 		super();

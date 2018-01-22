@@ -17,6 +17,9 @@ public class Mensagens {
 	
 	public static final String ERRO_PREENCHIMENTO = "Todos os campos com * devem ser preenchidos.";
 	
+	
+	public static final String ERRO_ENDERECO_BUSCA_CEP = "Ocorreu um erro ao consultar o CEP informado: "+PARAMETRO_EXCEPTION+". Informe os dados manualmente.";
+	
 	public static final String ERRO_ENDERECO_INSERIR = "Ocorreu um erro ao inserir o endereço: "+PARAMETRO_EXCEPTION;
 	public static final String ERRO_ENDERECO_INSERIR_0 = "Ocorreu um erro ao inserir o endereço, nenhum endereço foi registrado.";
 	public static final String ERRO_ENDERECO_ATUALIZAR = "Ocorreu um erro ao atualizar o endereço: "+PARAMETRO_EXCEPTION;
@@ -57,12 +60,15 @@ public class Mensagens {
 	public static final String OK_RESERVA_INSERIR = "A reserva foi registrada com sucesso.";
 	public static final String OK_RESERVA_ATUALIZAR = "A reserva foi atualizada com sucesso.";
 	
-	public static final String ERRO_USUARIO_INSERIR = "Ocorreu um erro ao inserir o usuario: "+PARAMETRO_EXCEPTION;
-	public static final String ERRO_USUARIO_INSERIR_0 = "Ocorreu um erro ao inserir o usuario, nenhum usuario foi registrado.";
-	public static final String ERRO_USUARIO_ATUALIZAR = "Ocorreu um erro ao atualizar o usuario: "+PARAMETRO_EXCEPTION;
-	public static final String ERRO_USUARIO_ATUALIZAR_0 = "Ocorreu um erro ao atualizar o usuario, nenhum usuario foi atualizado.";
-	public static final String ERRO_USUARIO_CONSULTAR = "A busca do usuario foi realizada com sucesso, porem não retornou nenhum registro.";
-	public static final String OK_USUARIO_INSERIR = "O usuario foi registrado com sucesso.";
-	public static final String OK_USUARIO_ATUALIZAR = "O usuario foi atualizado com sucesso.";
+	public static final String ERRO_USUARIO_INSERIR = "Ocorreu um erro ao inserir o usuário: "+PARAMETRO_EXCEPTION;
+	public static final String ERRO_USUARIO_INSERIR_0 = "Ocorreu um erro ao inserir o usuário, nenhum usuário foi registrado.";
+	public static final String ERRO_USUARIO_ATUALIZAR = "Ocorreu um erro ao atualizar o usuário: "+PARAMETRO_EXCEPTION;
+	public static final String ERRO_USUARIO_ATUALIZAR_0 = "Ocorreu um erro ao atualizar o usuário, nenhum usuário foi atualizado.";
+	public static final String ERRO_USUARIO_CONSULTAR = "A busca do usuário foi realizada com sucesso, porem não retornou nenhum registro.";
+	public static final String OK_USUARIO_INSERIR = "O usuário foi registrado com sucesso.";
+	public static final String OK_USUARIO_ATUALIZAR = "O usuário foi atualizado com sucesso.";
+	
+	public static final String ERRO_ATENTICAR = "Ocorreu um erro ao tentar autenticar o usuário: "+PARAMETRO_EXCEPTION;
+	public static final String ERRO_ATENTICAR_0 = "Não foi encontrado nenhum usuário ativo a partir dos dados informados.";
 
 }

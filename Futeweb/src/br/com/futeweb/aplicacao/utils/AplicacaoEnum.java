@@ -7,7 +7,12 @@ public enum AplicacaoEnum {
 	APLICACAO_NOME("Futeweb"),
 	SEVERIDADE_ERRO(FacesMessage.SEVERITY_ERROR),
 	SEVERIDADE_SUCESSO(FacesMessage.SEVERITY_INFO),
-	SEVERIDADE_ALERTA(FacesMessage.SEVERITY_WARN)
+	SEVERIDADE_ALERTA(FacesMessage.SEVERITY_WARN),
+	
+	PAGE_INDEX("index.web"),
+	PAGE_CADASTRO_PF("cadastro_pf.web"),
+	PAGE_CADASTRO_PJ("cadastro_pj.web")
+	
 	;
     
 	private String valor;

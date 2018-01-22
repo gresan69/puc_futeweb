@@ -19,7 +19,7 @@ public class ControleReserva extends GenericoDAO implements IControleReserva {
 	private ReservaDAO dao;
 	
 	private ReservaDAO getInstance(){
-		if (dao!=null){
+		if (dao==null){
 			dao = new ReservaDAO();
 		}
 		return dao;

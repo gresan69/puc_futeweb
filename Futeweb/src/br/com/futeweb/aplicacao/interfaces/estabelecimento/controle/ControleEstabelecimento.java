@@ -20,7 +20,7 @@ public class ControleEstabelecimento extends GenericoDAO implements IControleEst
 	private EstabelecimentoDAO dao;
 	
 	private EstabelecimentoDAO getInstance(){
-		if (dao!=null){
+		if (dao==null){
 			dao = new EstabelecimentoDAO();
 		}
 		return dao;

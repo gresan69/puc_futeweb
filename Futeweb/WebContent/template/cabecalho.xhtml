@@ -6,10 +6,13 @@
 	id="cabecalho">
 	
 	<div class="wrapper">
-	
 		qualquer coisa no cabecalho
+		
+		<p:outputLabel rendered="#{adminBean.autenticadoPF!=null}" value="Bem vindo #{adminBean.autenticadoPF.nome}"/>
+		<p:outputLabel rendered="#{adminBean.autenticadoPJ!=null}" value="Bem vindo #{adminBean.autenticadoPJ.nome}"/>
+		<p:commandButton rendered="#{adminBean.autenticadoPJ==null and adminBean.autenticadoPF==null}" ajax="false" value="Logout" actionListener="#{adminBean.logout()}" />
 	
-	
+	rendered="#{bean.a==12 and (bean.b==13 or bean.b==15)}"
 	</div>
 	
 </div>

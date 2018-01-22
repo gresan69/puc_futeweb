@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -19,21 +20,18 @@
 		
 		<link rel="shortcut icon" type="image/x-icon" href="css/imagem/favicon.png" />
 		<link rel="stylesheet" type="text/css" href="css/principal.css" />
+		<link rel="stylesheet" type="text/css" href="css/primefaces.css" />
 		
 	</h:head>
 
-	<h:body>
+	<body>
 		<f:view>
 			<ui:include src="cabecalho.xhtml" />
 				
-			<h:form enctype="multipart/form-data" id="form">
-				
+			<h:form id="form">
 				<div id="conteudo"><ui:insert name="conteudo" /></div>
-				
 			</h:form>
-			
-			
 			<ui:include src="rodape.xhtml" />
 		</f:view>
-	</h:body>
+	</body>
 </html>

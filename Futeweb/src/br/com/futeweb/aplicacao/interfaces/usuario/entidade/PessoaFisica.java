@@ -14,8 +14,10 @@ public class PessoaFisica implements Serializable {
 	private String email;
 	private String cpf;
 	private Date dataNascimento;
-	private Usuario usuario;
-	private Endereco endereco;
+	private Usuario usuario = new Usuario();
+	private Endereco endereco = new Endereco();
+	
+	public PessoaFisica(){}
 	
 	public PessoaFisica(int id, String nome, String email, String cpf, Date dataNascimento, Usuario usuario,
 			Endereco endereco) {
@@ -82,6 +84,8 @@ public class PessoaFisica implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+	
+	
 	
 	
 }

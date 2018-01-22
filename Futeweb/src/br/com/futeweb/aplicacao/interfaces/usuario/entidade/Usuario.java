@@ -9,7 +9,10 @@ public class Usuario implements Serializable {
 	private int id;
 	private String login;
 	private String senha;
+	private String confirmaSenha;
 	private boolean ativo;
+	
+	public Usuario(){}
 	
 	public Usuario(int id, String login, String senha, boolean ativo) {
 		super();
@@ -56,5 +59,13 @@ public class Usuario implements Serializable {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
 	}
 }

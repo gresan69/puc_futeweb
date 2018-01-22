@@ -1,10 +1,12 @@
 package br.com.futeweb.aplicacao.interfaces.endereco.controle;
 
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
+import javax.xml.rpc.ServiceException;
 
 import br.com.futeweb.aplicacao.interfaces.endereco.dao.EnderecoDAO;
 import br.com.futeweb.aplicacao.interfaces.endereco.entidade.Endereco;
@@ -18,7 +20,7 @@ public class ControleEndereco implements IControleEndereco {
 	private EnderecoDAO dao;
 	
 	private EnderecoDAO getInstance(){
-		if (dao!=null){
+		if (dao==null){
 			dao = new EnderecoDAO();
 		}
 		return dao;
@@ -73,4 +75,10 @@ public class ControleEndereco implements IControleEndereco {
 		}
 		return retorno;
 	}
+	
+	@Override
+	public void buscarCep(Endereco endereco) throws ServiceException, RemoteException{
+		getInstance().buscarCep(endereco);
+	}
+	
 }

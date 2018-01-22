@@ -19,7 +19,7 @@ public class ControleMaterial extends GenericoDAO implements IControleMaterial {
 	private MaterialDAO dao;
 	
 	private MaterialDAO getInstance(){
-		if (dao!=null){
+		if (dao==null){
 			dao = new MaterialDAO();
 		}
 		return dao;
