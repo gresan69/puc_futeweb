@@ -21,6 +21,14 @@ public class Quadra implements Serializable {
 		this.nome = nome;
 		this.estabelecimento = estabelecimento;
 	}
+	
+	public boolean validarObjeto(Quadra obj){
+		return (obj!=null
+				&& obj.getNome()!=null && !"".equals(obj.getNome())
+				&& obj.getEstabelecimento()!=null
+				) ? true : false;
+	}
+	
 	public int getId() {
 		return id;
 	}

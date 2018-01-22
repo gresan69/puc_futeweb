@@ -23,6 +23,15 @@ public class Reserva implements Serializable {
 		this.pessoaFisica = pessoaFisica;
 	}
 	
+	public boolean validarObjeto(Reserva obj){
+		return (obj!=null
+				&& obj.getDisponibilidadeQuadra()!=null
+				&& obj.getDisponibilidadeMaterial()!=null
+				&& obj.getPessoaFisica()!=null
+				) ? true : false;
+	}
+	
+	
 	public int getId() {
 		return id;
 	}

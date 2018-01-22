@@ -6,7 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 
-import br.com.futeweb.aplicacao.dao.endereco.EnderecoDAO;
+import br.com.futeweb.aplicacao.interfaces.endereco.dao.EnderecoDAO;
 import br.com.futeweb.aplicacao.interfaces.endereco.entidade.Endereco;
 import br.com.futeweb.aplicacao.utils.Logger;
 import br.com.futeweb.aplicacao.utils.Mensagens;
@@ -42,12 +42,20 @@ public class ControleEndereco implements IControleEndereco {
 
 	@Override
 	public List<Endereco> obterTodos() {
-		return getInstance().obterTodos();
+		List<Endereco> lista = getInstance().obterTodos();
+		if (lista==null || lista.size()==0){
+			new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_ENDERECO_CONSULTAR, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+		}
+		return lista;
 	}
 
 	@Override
 	public List<Endereco> obterPorCriterio(Endereco object) throws SQLException {
-		return getInstance().obterPorCriterio(object);
+		List<Endereco> lista = getInstance().obterPorCriterio(object);
+		if (lista==null || lista.size()==0){
+			new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_ENDERECO_CONSULTAR, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+		}
+		return lista;
 	}
 	
 	@Override

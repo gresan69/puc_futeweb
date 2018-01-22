@@ -28,6 +28,18 @@ public class PessoaFisica implements Serializable {
 		this.usuario = usuario;
 		this.endereco = endereco;
 	}
+	
+	public boolean validarObjeto(PessoaFisica obj){
+		return (obj!=null
+				&& obj.getNome()!=null && !"".equals(obj.getNome())
+				&& obj.getEmail()!=null && !"".equals(obj.getEmail())
+				&& obj.getCpf()!=null && !"".equals(obj.getCpf())
+				&& obj.getDataNascimento()!=null && !"".equals(obj.getDataNascimento())
+				&& obj.getUsuario()!=null
+				&& obj.getEndereco()!=null
+				) ? true : false;
+	}
+	
 	public int getId() {
 		return id;
 	}

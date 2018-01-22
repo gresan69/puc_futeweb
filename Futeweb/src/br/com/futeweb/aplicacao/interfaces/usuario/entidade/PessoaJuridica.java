@@ -24,6 +24,16 @@ public class PessoaJuridica implements Serializable {
 		this.cnpj = cnpj;
 		this.usuario = usuario;
 	}
+	
+	public boolean validarObjeto(PessoaJuridica obj){
+		return (obj!=null
+				&& obj.getNome()!=null && !"".equals(obj.getNome())
+				&& obj.getEmail()!=null && !"".equals(obj.getEmail())
+				&& obj.getCnpj()!=null && !"".equals(obj.getCnpj())
+				&& obj.getUsuario()!=null
+				) ? true : false;
+	}
+	
 	public int getId() {
 		return id;
 	}

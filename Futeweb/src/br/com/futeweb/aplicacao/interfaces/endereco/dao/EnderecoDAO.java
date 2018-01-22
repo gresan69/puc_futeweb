@@ -1,4 +1,4 @@
-package br.com.futeweb.aplicacao.dao.endereco;
+package br.com.futeweb.aplicacao.interfaces.endereco.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

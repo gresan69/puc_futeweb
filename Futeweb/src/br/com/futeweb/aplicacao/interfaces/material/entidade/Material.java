@@ -21,6 +21,14 @@ public class Material implements Serializable {
 		this.nome = nome;
 		this.estabelecimento = estabelecimento;
 	}
+	
+	public boolean validarObjeto(Material obj){
+		return (obj!=null
+				&& obj.getNome()!=null && !"".equals(obj.getNome())
+				&& obj.getEstabelecimento()!=null
+				) ? true : false;
+	}
+	
 	public int getId() {
 		return id;
 	}

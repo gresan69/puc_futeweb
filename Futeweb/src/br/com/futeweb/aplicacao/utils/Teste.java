@@ -5,8 +5,8 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-import br.com.futeweb.aplicacao.dao.endereco.EnderecoDAO;
 import br.com.futeweb.aplicacao.interfaces.endereco.controle.IControleEndereco;
+import br.com.futeweb.aplicacao.interfaces.endereco.dao.EnderecoDAO;
 import br.com.futeweb.aplicacao.interfaces.endereco.entidade.Endereco;
 import br.com.futeweb.aplicacao.interfaces.estabelecimento.controle.ControleEstabelecimento;
 import br.com.futeweb.aplicacao.interfaces.estabelecimento.controle.IControleEstabelecimento;

@@ -1,80 +1,78 @@
 package br.com.futeweb.aplicacao.interfaces.estabelecimento.controle;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
 
 import br.com.futeweb.aplicacao.dao.generico.GenericoDAO;
-import br.com.futeweb.aplicacao.interfaces.endereco.entidade.Endereco;
+import br.com.futeweb.aplicacao.interfaces.estabelecimento.dao.EstabelecimentoDAO;
 import br.com.futeweb.aplicacao.interfaces.estabelecimento.entidade.Estabelecimento;
+import br.com.futeweb.aplicacao.utils.Logger;
+import br.com.futeweb.aplicacao.utils.Mensagens;
 
 @Stateless
 public class ControleEstabelecimento extends GenericoDAO implements IControleEstabelecimento {
 
 	private static final long serialVersionUID = 1L;
+	
+	private EstabelecimentoDAO dao;
+	
+	private EstabelecimentoDAO getInstance(){
+		if (dao!=null){
+			dao = new EstabelecimentoDAO();
+		}
+		return dao;
+	}
 
 	@Override
-	/*
-	 * @Method não implementado.
-	 */
 	public int inserir(Estabelecimento object) throws SQLException {
-		return 0;
-	}
-	
-//	@Override
-	public int inserir(Estabelecimento object, int idEndereco) throws SQLException {
-		String query = " insert into estabelecimento (nome, descricao, idEndereco) values (?, ?, ?) ";
-		montarQuery(query);
-		setParametros().setString(1, object.getNome());
-		setParametros().setString(2, object.getDescricao());
-		setParametros().setInt(3, idEndereco);
-		return executarUpdate();
+		int retorno = 0;
+		if (object.validarObjeto(object)){
+			retorno = getInstance().inserir(object);
+			if (retorno!=0){
+				new Logger(true, FacesMessage.SEVERITY_INFO, Mensagens.OK_ESTABELECIMENTO_INSERIR, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+			}else{
+				new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_ESTABELECIMENTO_INSERIR_0, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+			}
+		}else{
+			new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_PREENCHIMENTO, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+		}
+		return retorno;
 	}
 	
 	@Override
 	public List<Estabelecimento> obterTodos() {
-		List<Estabelecimento> lista = new ArrayList<Estabelecimento>();
-		String query = " select es.id, es.nome, es.descricao, ";
-		query += " en.id, en.logradouro, en.numero, en.cidade, en.estado, en.cep from estabelecimento es, endereco en ";
-		query += " where es.idEndereco = en.id ";
-		montarQuery(query);
-		String[][] retorno = executarQuery();
-		if (retorno != null){
-			for (String r[] : retorno){
-				lista.add(new Estabelecimento(Integer.parseInt(r[0]), r[1], r[2], new Endereco(Integer.parseInt(r[3]), r[4], Integer.parseInt(r[5]), r[6], r[7], r[8])));
-			}
+		List<Estabelecimento> lista = getInstance().obterTodos();
+		if (lista==null || lista.size()==0){
+			new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_ESTABELECIMENTO_CONSULTAR, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
 		}
 		return lista;
 	}
 	
 	@Override
 	public List<Estabelecimento> obterPorCriterio(Estabelecimento object) throws SQLException {
-		List<Estabelecimento> lista = new ArrayList<Estabelecimento>();
-		String query = " select es.id, es.nome, es.descricao, ";
-		query += " en.id, en.logradouro, en.numero, en.cidade, en.estado, en.cep from estabelecimento es, endereco en ";
-		query += " where es.id = ? or es.nome = ? ";
-		query += " and es.idEndereco = en.id ";		
-		montarQuery(query);
-		setParametros().setInt(1, object.getId());
-		setParametros().setString(2, object.getNome());
-		String[][] retorno = executarQuery();
-		if (retorno != null){
-			for (String r[] : retorno){
-				lista.add(new Estabelecimento(Integer.parseInt(r[0]), r[1], r[2], new Endereco(Integer.parseInt(r[3]), r[4], Integer.parseInt(r[5]), r[6], r[7], r[8])));
-			}
+		List<Estabelecimento> lista = getInstance().obterPorCriterio(object);
+		if (lista==null || lista.size()==0){
+			new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_ESTABELECIMENTO_CONSULTAR, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
 		}
 		return lista;
 	}
 	
 	@Override
 	public int atualizar(Estabelecimento object) throws SQLException {
-		String query = " update estabelecimento set nome = ?, descricao = ? where id = ? ";
-		montarQuery(query);
-		setParametros().setString(1, object.getNome());
-		setParametros().setString(2, object.getDescricao());
-		setParametros().setInt(3, object.getId());
-		return executarUpdate();
+		int retorno = 0;
+		if (object.validarObjeto(object)){
+			retorno = getInstance().atualizar(object);
+			if (retorno!=0){
+				new Logger(true, FacesMessage.SEVERITY_INFO, Mensagens.OK_ESTABELECIMENTO_ATUALIZAR, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+			}else{
+				new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_ESTABELECIMENTO_ATUALIZAR_0, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+			}
+		}else{
+			new Logger(true, FacesMessage.SEVERITY_ERROR, Mensagens.ERRO_PREENCHIMENTO, Mensagens.ID_CAMPO_MENSAGEM_QUALQUER);
+		}
+		return retorno;
 	}
 }

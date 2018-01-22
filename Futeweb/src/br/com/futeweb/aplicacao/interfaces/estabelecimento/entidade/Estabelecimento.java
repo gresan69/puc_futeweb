@@ -24,6 +24,14 @@ public class Estabelecimento implements Serializable {
 		this.descricao = descricao;
 		this.endereco = endereco;
 	}
+	
+	public boolean validarObjeto(Estabelecimento obj){
+		return (obj!=null
+				&& obj.getNome()!=null && !"".equals(obj.getNome())
+				&& obj.getDescricao()!=null && !"".equals(obj.getDescricao())
+				&& obj.getEndereco()!=null
+				) ? true : false;
+	}
 
 
 	public int getId() {
